@@ -6,11 +6,11 @@ const { Tag, Product, ProductTag } = require('../../models');
 // be sure to include its associated Product data
   router.get('/', (req, res) => {
     Tag.findAll({
-      include: {
+      include: [{
         model: Product
-      }
+      }]
     }).then((tag) => {
-      res.json(tag);
+      res.json(tag)
     })
     .catch(err => {
       console.log(err);
@@ -22,16 +22,16 @@ const { Tag, Product, ProductTag } = require('../../models');
 // be sure to include its associated Product data
   router.get('/:id', (req, res) => {
     Tag.findOne({
-      where: { id: req.body.id },
+      where: { id: req.params.id },
       include: {
-        model: Product
+        model: Product,
+        // attributes: ['product_name', 'product_price', 'product_stock', 'category_id']
       }
-    }).then((tag) => {
-      res.json(tag);
     })
+    .then(tag => res.json(tag))
     .catch(err => {
       console.log(err);
-      req.statusCode(500).json(err);
+      res.status(500).json(err);
     });
   });
 
@@ -50,10 +50,10 @@ const { Tag, Product, ProductTag } = require('../../models');
 // update a tag's name by its `id` value
   router.put('/:id', (req, res) => {
   Tag.update(req.body, {
-    where: { id: req.body.id }
+    where: { id: req.params.id }
   }).then((tag) => {
     if (!tag) {
-      res.status(404).json({ message:''})
+      res.status(404).json({ message:'Unabel to Update Tags'})
     }
     res.json(tag)
   })
@@ -65,7 +65,21 @@ const { Tag, Product, ProductTag } = require('../../models');
 
   // delete on tag by its `id` value
   router.delete('/:id', (req, res) => {
-
+    Tag.destroy({ 
+      where: {
+        id: req.params.id
+      }
+    }).then(tag => {
+      if (!tag) {
+        res.status(404).json({ message: 'Unable to find Tag with this id!'});
+        return;
+      }
+      res.json(tag);
+    })
+    .catch(err => {
+      console.log(err);
+      req.status(500).json(err);
+    });
   });
 
 module.exports = router;
