@@ -21,3 +21,17 @@ THEN the data for each of these routes is displayed in a formatted JSON <br>
 WHEN I test API POST, PUT, and DELETE routes in Insomnia Core <br>
 THEN I am able to successfully create, update, and delete data in my database <br>
 
+## Mock Up
+![Alt text](Assets/13-orm-homework-demo-01.gif)
+
+![Alt text](Assets/13-orm-homework-demo-02.gif)
+
+![Alt text](Assets/13-orm-homework-demo-03.gif)
+
+
+## Walkthrough Video
+[ScreenCastify LINK](https://drive.google.com/file/d/13DUrNMoVSnx0_fv9mJWXcsdI-pcEOyjD/view)
+
+## GitHub
+
+GitHub URL: https://github.com/ademsahil274

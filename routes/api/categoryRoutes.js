@@ -76,7 +76,7 @@ router.delete('/:id', (req, res) => {
   Category.destroy({
     where: { id: req.params.id }
   }).then((category) => {
-    if (category) {
+    if (!category) {
       res.status(404).json({ message: 'Unable to find the ID in the category!'});
       return;
     }

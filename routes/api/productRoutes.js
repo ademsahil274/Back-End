@@ -23,6 +23,7 @@ router.get("/", (req, res) => {
       {
         model: Tag,
         attributes: ["tag_name"],
+        through: "ProductTag",
       },
     ],
   })
@@ -104,10 +105,10 @@ router.put("/:id", (req, res) => {
   })
     .then((product) => {
       // find all associated tags from ProductTag
-      return ProductTag.findAll({ where: { product_id: req.params.id } });
+      return ProductTag.findAll({ where: { product_id: req.params.id }});
     })
     .then((productTags) => {
-      console.log(productTags);
+      // console.log(productTags);
       // get list of current tag_ids
       const productTagIds = productTags.map(({ tag_id }) => tag_id);
       // create filtered list of new tag_ids
