@@ -133,7 +133,7 @@ router.put("/:id", (req, res) => {
         ]);
       }
     })
-    .then((updatedProductTags) => res.json(updatedProductTags))
+    .then((updatedProductTags) => res.send("Successfully Updated"))
     .catch((err) => {
       console.log(err);
       res.status(400).json(err);
